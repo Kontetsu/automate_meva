@@ -5,6 +5,7 @@
 #################################################################################
 
 # Enable the powershell to read xml files
+$FilePath = "C:\Users\Ergi\Documents\automate_meva\test.xml"
 $XmlDocument = new-object System.Xml.XmlDocument
 [xml]$XmlDocument = Get-Content -Path $FilePath
 
@@ -16,7 +17,6 @@ $q3 = "3. Portret Retrival"
 $print = Read-Host -Prompt "PLease chose the folowing options to see enabled or disabled features: `n $q1 `n $q2`n $q3"
 
 # File to read xml from
-$FilePath = "C:\Users\erget\OneDrive\Documents\automate_meva\test.xml"
 
 
 # Declare the value of the xmlf
@@ -27,12 +27,12 @@ $bio_dis = $XmlDocument.catalog.book.price[5]
 function bio_login_check()
    {
         if ($bio_enbl -eq '50$') {
-            Write-Host "Biologin Enabled, We are going to Disable it now."
+            Write-Host "Biologin Enabled, We are going to Disable it now." 
             Start-Sleep -Seconds 5
             bio_login_disable
         }
         elseif ($bio_dis -eq '55$') {
-            Write-Host "Biolagin Disabled, We are going to Enable it now"
+            Write-Host "Biolagin Disabled, We are going to Enable it now" 
             Start-Sleep -Seconds 5
             bio_login_enable
         }break
@@ -42,7 +42,7 @@ function bio_login_check()
 function bio_login_enable()
    {
     $XmlDocument.catalog.book[5].price = '50$'  # Set the value that we want
-    Write-Host "biologin Enabled"
+    Write-Host "biologin Enabled" -ForegroundColor Green
     $XmlDocument.Save($FilePath)    # saves the xmf file to the same path with the same name
     Write-Host "Saved into " $FilePath -ForegroundColor Green  
 }
@@ -51,7 +51,7 @@ function bio_login_enable()
 function bio_login_disable()
    {
     $XmlDocument.catalog.book[5].price = '55$'
-    Write-Host "biologin Disabled"
+    Write-Host "biologin Disabled" 
     $XmlDocument.Save($FilePath)
     Write-Host "Saved into " $FilePath -ForegroundColor Green  
 }
@@ -76,7 +76,7 @@ function digital_sig_check()
 function digital_sig_enable()
    {
     $XmlDocument.catalog.book[6].price = '4.95'
-    Write-Host "Digital Signature Enabled"
+    Write-Host "Digital Signature Enabled " -ForegroundColor Green  
     $XmlDocument.Save($FilePath)
     Write-Host "Saved into " $FilePath -ForegroundColor Green  
 }
@@ -84,7 +84,7 @@ function digital_sig_enable()
 function digital_sig_disable()
    {
     $XmlDocument.catalog.book[6].price = '5'
-    Write-Host "Digital Signature Disabled"
+    Write-Host "Digital Signature Disabled " -ForegroundColor Red
     $XmlDocument.Save($FilePath)
     Write-Host "Saved into " $FilePath -ForegroundColor Green  
 }
@@ -110,7 +110,7 @@ function portret_check()
 function portret_enable()
    {
     $XmlDocument.catalog.book[11].genre = "Computer"
-    Write-Host "Portret Enabled"
+    Write-Host "Portret Enabled " -ForegroundColor Green  
     $XmlDocument.Save($FilePath)
     Write-Host "Saved into " $FilePath -ForegroundColor Green  
 }
@@ -118,7 +118,7 @@ function portret_enable()
 function portret_disable()
    {
     $XmlDocument.catalog.book[11].genre = "Laptop"
-    Write-Host "Portret Disabled"
+    Write-Host "Portret Disabled " -ForegroundColor Red
     $XmlDocument.Save($FilePath)
     Write-Host "Saved into " $FilePath -ForegroundColor Green  
 }
