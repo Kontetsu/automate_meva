@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: quiz-app-back
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        editor: vscode
+    spec:
+      containers:
+      - name: quiz-app-back
+        image: backend
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+          name:  backend
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  quiz-app-back
+spec:
+  selector:
+    app:  quiz-app-back
+  type:  NodePort
+  ports:
+  - name:  frontend
+    port:  8080
+    targetPort:  8080

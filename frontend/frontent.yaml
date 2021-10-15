@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: quiz-app-front
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        editor: vscode
+    spec:
+      containers:
+      - name: quiz-app-front
+        image: frontend
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+          name:  frontend
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  quiz-app-front
+spec:
+  selector:
+    app:  quiz-app-front
+  type:  LoadBalancer
+  ports:
+  - name:  frontend
+    port:  80
+    targetPort:  80
+
